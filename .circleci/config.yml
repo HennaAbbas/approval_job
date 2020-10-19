@@ -1,0 +1,28 @@
+version: 2.1
+
+executors:
+  base-exec:
+    docker:
+      - image: 'cimg/base:stable'
+jobs:
+  test-tag:
+    executor: base-exec
+    steps:
+      - run: echo "$CIRCLE_TAG"
+  approve-me:
+    executor: base-exec
+    steps:
+      - run: echo "whee I'm approved"
+
+orbs:
+  node: circleci/node@3.0.0
+
+workflows:
+  on-tag:
+    jobs:
+      - hold:
+          type: approval
+          
+      - test-tag:
+          requires:
+            - hold
