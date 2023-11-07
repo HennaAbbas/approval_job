@@ -13,6 +13,7 @@ jobs:
     executor: base-exec
     steps:
       - run: echo "whee I'm approved"
+      - run: echo "wee"
 
 orbs:
   node: circleci/node@3.0.0
