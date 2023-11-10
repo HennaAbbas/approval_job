@@ -21,12 +21,11 @@ orbs:
 workflows:
   on-tag:
     jobs:
-      - hold:
-          type: approval
           
       - test-tag:
-          requires:
-            - hold
+          filters:
+            branches:
+              only: main      
 
             #testing this out
             
