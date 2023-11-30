@@ -27,5 +27,4 @@ workflows:
             branches:
               only: main      
 
-            #testing this out
             
