@@ -5,27 +5,18 @@ executors:
     docker:
       - image: 'cimg/base:stable'
 jobs:
-  test-tag:
+  test:
     executor: base-exec
     steps:
-      - run: echo "$CIRCLE_TAG"
-  approve-me:
-    executor: base-exec
-    steps:
-      - run: echo "whee I'm approved"
-      - run: echo "wee"
+      - run: - run: git clone -b "$CIRCLE_BRANCH" << pipeline.trigger_parameters.github_app.repo_url >>"
 
 orbs:
   node: circleci/node@3.0.0
 
 workflows:
-  on-tag:
-    jobs:
-          
-      - test-tag:
-          filters:
-            branches:
-              only: main      
+  my_workflow:
+    jobs:       
+      - test   
 
             #testing this out
             
