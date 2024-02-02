@@ -9,6 +9,11 @@ jobs:
     executor: base-exec
     steps:
       - run: git clone -b "$CIRCLE_BRANCH" << pipeline.trigger_parameters.github_app.repo_url >>
+      - add_ssh_keys:
+          fingerprints:
+            - "SHA256:nTn/dmOc5fORPLhqLAYxQUFB+94WN172pnNQ36tV2qw"
+      - run: git clone -b "$CIRCLE_BRANCH" << pipeline.trigger_parameters.github_app.repo_url >>
+            
 
 orbs:
   node: circleci/node@3.0.0
