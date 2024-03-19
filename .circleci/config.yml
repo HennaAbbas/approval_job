@@ -1,28 +1,32 @@
 version: 2.1
 
-
-#test
-executors:
-  base-exec:
-    docker:
-      - image: 'cimg/base:stable'
-jobs:
-  test:
-    executor: base-exec
-    steps:
-      - add_ssh_keys:
-          fingerprints:
-            - "SHA256:nTn/dmOc5fORPLhqLAYxQUFB+94WN172pnNQ36tV2qw"
-      - run: git clone -b "$CIRCLE_BRANCH" << pipeline.trigger_parameters.github_app.repo_url >>
-            
-
 orbs:
-  node: circleci/node@3.0.0
-
+  macos: circleci/macos@2.4.1
+  
+jobs:
+  build:
+    macos:
+      xcode: 15.0.0
+    resource_class: macos.m1.medium.gen1
+    
+    steps:
+      - run: xcodebuild -version
+      - run: brew --version
+      - run:
+          command: |
+            while true; do
+              sleep 600
+              echo "this in running  in the background"
+            done
+          background: true
+      - macos/enable-vnc
+      
+    
+      
 workflows:
-  my_workflow:
-    jobs:       
-      - test   
+  say-hello-workflow:
+    jobs:
+      - build
 
             #testing this out
             
