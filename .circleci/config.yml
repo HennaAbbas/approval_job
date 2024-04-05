@@ -20,12 +20,20 @@ jobs:
             done
           background: true
       - macos/enable-vnc
+  test:
+    macos:
+      xcode: 15.0.0
+    resource_class: macos.x86.medium.gen2
+    
+    steps:
+      - run: xcodebuild -version      
       
     
       
 workflows:
   say-hello-workflow:
     jobs:
+      - test
       - build
 
             #testing this out
