@@ -11,7 +11,7 @@ jobs:
     
     steps:
       - run: xcodebuild -version
-      - run: brew --version
+      - run: xrm
       - run:
           command: |
             while true; do
