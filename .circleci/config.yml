@@ -10,23 +10,14 @@ jobs:
     resource_class: macos.x86.medium.gen2
     
     steps:
-      - run: xcodebuild -version
-      - run: xrm
-      - run:
-          command: |
-            while true; do
-              sleep 600
-              echo "this in running  in the background"
-            done
-          background: true
-      - macos/enable-vnc
+      - run: echo "hello world! -- build job" 
   test:
     macos:
       xcode: 15.0.0
     resource_class: macos.x86.medium.gen2
     
     steps:
-      - run: xcodebuild -version      
+      - run: echo "ello! - test job"       
       
     
       
@@ -34,7 +25,11 @@ workflows:
   say-hello-workflow:
     jobs:
       - test
-      - build
+      - build: 
+          filters:
+            tags:
+              only:
+                - v2     
 
             #testing this out
             
