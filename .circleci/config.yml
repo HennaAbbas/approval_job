@@ -1,32 +1,17 @@
 version: 2.1
 
-orbs:
-  macos: circleci/macos@2.4.1
-  
 jobs:
-  build:
-    macos:
-      xcode: 15.0.0
-    resource_class: macos.x86.medium.gen2
-    
+  test-coordinator:
+    type: no-op
+  test-unit:
+    docker:
+      - image: cimg/node:20.10
     steps:
-      - run: echo "hello world! -- build job" 
-  test:
-    macos:
-      xcode: 15.0.0
-    resource_class: macos.x86.medium.gen2
-    
-    steps:
-      - run: echo "ello! - test job"       
-      
-    
-      
-workflows:
-  say-hello-workflow:
-    jobs:
-      - test
-      - build: 
-          type: approval   
+      - checkout
 
-        
-            
+
+workflows:
+  build-test-deploy:
+    jobs:
+      - test-coordinator
+      - test-unit
