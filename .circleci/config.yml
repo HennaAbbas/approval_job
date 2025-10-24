@@ -13,6 +13,7 @@ jobs:
 workflows:
   build-test-deploy:
     jobs:
-      - test-coordinator
+      - test-coordinator: 
+          type: approval
       - test-unit
 
