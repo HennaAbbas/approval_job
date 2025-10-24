@@ -13,8 +13,7 @@ jobs:
 workflows:
   build-test-deploy:
     jobs:
-      - test-no-op: 
-          type: approval
+      - test-no-op
       - test-unit
 
       #test
